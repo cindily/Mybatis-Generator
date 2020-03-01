@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!--JDBC相关配置文件，存放JDBC连接所需要的各个参数-->
+    <properties  resource="dataSource.properties"/>
+    <context  id="mysqlTables"   targetRuntime="MyBatis3">
+        <!--JDBC连接配置-->
+        <jdbcConnection  driverClass="${jdbc.driver}"
+                         connectionURL="${jdbc.url}"  userId="${jdbc.username}"  password="${jdbc.password}"/>
+        <!--指定生成的类型为java类型，避免数据库中number等类型字段 -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals"  value="false"/>
+        </javaTypeResolver>
+
+        <!--自动生成的实体的存放包路径 -->
+        <javaModelGenerator  targetPackage="com.hcy.entiry"
+                             targetProject="src/main/java">
+            <property  name="enableSubPackages"  value="true"/>
+            <property  name="trimStrings"  value="true"/>
+        </javaModelGenerator>
+
+        <!--自动生成的*Mapper.xml文件存放路径 -->
+        <sqlMapGenerator  targetPackage="com.hcy.mapper"
+                          targetProject="src/main/java">
+            <property  name="enableSubPackages"  value="true"/>
+        </sqlMapGenerator>
+
+        <!--自动生成的*Mapper.java存放路径 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.hcy.mapper"  targetProject="src/main/java">
+            <property  name="enableSubPackages"  value="true"/>
+        </javaClientGenerator>
+
+        <!--数据库中对应的表，生成的类名，以及配置自动生成方法有哪些的参数-->
+        <table  tableName="admin"  domainObjectName="admin"
+                enableCountByExample="false"   enableUpdateByExample="false"
+                enableDeleteByExample="false"  enableSelectByExample="true"
+                selectByExampleQueryId="false">
+        </table>
+
+        <!--<table  tableName="teacher"   domainObjectName="Tercher">-->
+        <!--<generatedKey  column="ID"  sqlStatement="select uuid_short()"   identity="false"/>-->
+        <!--</table>-->
+
+    </context>
+</generatorConfiguration>
